@@ -1,8 +1,12 @@
 const models = require('./models');
+const express = require('express');
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 
-models.User.findOne({
-  where: {username: "joel"},
-  include: [models.Dog]
-}).then((user) => {
-  console.log(user.Dogs);
-});
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("you did it");
+})
+
+app.listen(3000)
