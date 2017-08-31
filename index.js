@@ -1,12 +1,8 @@
 const models = require('./models');
 
-models.Dog.findOne({
-  where: {name: "Tom"}
-}).then((dog) => {
-  models.User.findOne({
-    where: {username: "joel"}
-  }).then((user) => {
-    dog.userId = user.id;
-    dog.save();
-  });
+models.User.findOne({
+  where: {username: "joel"},
+  include: [models.Dog]
+}).then((user) => {
+  console.log(user.Dogs);
 });
