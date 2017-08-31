@@ -1,18 +1,12 @@
 const models = require('./models');
 
-models.User.findOne({
-  where: {username: "ASLKDJASLKDJASLKDJAKLSJD"}
-}).then((user) => {
-  let newDog = models.Dog.build({
-    name: "Tom",
-    isWearingHat: true,
-    isAggressive: false
+models.Dog.findOne({
+  where: {name: "Tom"}
+}).then((dog) => {
+  models.User.findOne({
+    where: {username: "joel"}
+  }).then((user) => {
+    dog.userId = user.id;
+    dog.save();
   });
-
-  // If user is found, create dog with user
-  // If user is not found, create dog without user.
-  if (user !== null) {
-    newDog.userId = user.id;
-  }
-  newDog.save();
 });
